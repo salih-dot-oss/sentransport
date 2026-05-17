@@ -9,6 +9,7 @@ import Footer from './Footer';
 function App() {
   const [recherche, setRecherche] = useState("");
   const [ligneSelectionnee, setLigneSelectionnee] = useState(null);
+  const [nbRecherches, setNbRecherches] = useState(0);
 
   const lignes = [
     { id: 1, numero: "1", depart: "Parcelles Assainies", arrivee: "Plateau", arrets: 14, couleur: "#3498db", listeArrets: ["Parcelles Assainies", "Cambérène", "Liberté 6", "Liberté 5", "Liberté 1", "Castors", "Fann Résidence", "Université", "Médina", "Tilène", "Sandaga", "Kermel", "Rue Carnot", "Plateau"] },
@@ -39,9 +40,12 @@ function App() {
       <Header />
 
       <main className="contenu">
+        <p>Vous avez effectué {nbRecherches} recherche(s)</p>
+
         <Recherche
           valeur={recherche}
-          onChange={setRecherche}
+          onChange={valeur => { setRecherche(valeur); setNbRecherches(n => n + 1); }}
+          onEffacer={() => setRecherche("")}
         />
 
         <p className="resultat-recherche">
@@ -49,6 +53,10 @@ function App() {
           {lignesFiltrees.length > 1 ? "s" : ""} trouvee
           {lignesFiltrees.length > 1 ? "s" : ""}
         </p>
+
+        {lignesFiltrees.length === 0 && (
+          <p>Aucune ligne trouvée</p>
+        )}
 
         {lignesFiltrees.map(ligne => (
           <LigneBus
