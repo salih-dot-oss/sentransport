@@ -6,6 +6,8 @@ import LigneBus from './LigneBus';
 import DetailLigne from './DetailLigne';
 import Footer from './Footer';
 import Carte from './Carte';
+import Meteo from './Meteo';
+import SignalerIncident from './SignalerIncident';
 
 function App() {
   // 1. Trois etats
@@ -132,6 +134,7 @@ function App() {
       <Header />
 
       <main className="contenu">
+        <Header />
         <p>Vous avez effectué {nbRecherches} recherche(s)</p>
 
         <button onClick={chargerLignes}>Recharger</button>
@@ -172,7 +175,9 @@ function App() {
           <DetailLigne ligne={ligneSelectionnee} />
         )}
 
+        <Meteo />
         <Carte />
+        <SignalerIncident />
       </main>
 
       <Footer />
